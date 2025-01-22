@@ -107,7 +107,6 @@ export default function GenrePage() {
           <span className="px-4 text-white text-xl bg-slate-950 w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl  ">{genreFromPath}</span>
           {selectedGenreData.data.results.map((movie: any, key: any) => (
             <div key={key} className="flex flex-wrap m-2 w-[23%]  ">
-              {/* Added margin to give spacing between cards */}
               <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                 <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1 ">
                   <span className="text-sm font-medium text-slate-600 text-center ">
