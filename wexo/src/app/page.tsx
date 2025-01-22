@@ -136,7 +136,7 @@ export default function HomePage() {
   });
 
   // jeg valgt at havde Gerne i en state for sig selv så opdate dem ville være hurtigere og havde nemere control over dem.
-  const [actiondata, setActionData] = useState({ data: { results: [] }, currentPage: 1 });
+  const [actionData, setActionData] = useState({ data: { results: [] }, currentPage: 1 });
   const [comedyData, setComedyData] = useState({ data: { results: [] }, currentPage: 1 });
   const [thrillerData, setThrillerData] = useState({ data: { results: [] }, currentPage: 1 });
   const [warData, setWarData] = useState({ data: { results: [] }, currentPage: 1 });
@@ -162,8 +162,8 @@ export default function HomePage() {
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const newData = await Action(actiondata.currentPage);
-        console.log(actiondata);
+        const newData = await Action(actionData.currentPage);
+        console.log(actionData);
         setActionData((prevState: any) => {
           const updatedResults = new Set([...prevState.data.results, ...newData.results]);
 
@@ -180,7 +180,7 @@ export default function HomePage() {
       }
     };
     loadMovies();
-  }, [actiondata.currentPage]);
+  }, [actionData.currentPage]);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -403,7 +403,7 @@ export default function HomePage() {
           <span className="px-4 text-white text-xl bg-slate-950 w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl "> Action</span>
           <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
             <div className="flex space-x-4">
-              {actiondata.data.results.map((movie: any) => (
+              {actionData.data.results.map((movie: any) => (
                 <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
                   {/* Added margin to give spacing between cards */}
                   <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
