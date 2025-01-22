@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand, faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Modal from "@/components/Modal";
+import Navbar from "@/components/Navbar";
 
 const API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDIzOGYxOWM5ZGMzNjVkY2M0YWIxODRlMDNjOThhZSIsIm5iZiI6MTczNjUwMTMxMC45MjksInN1YiI6IjY3ODBlODNlZWU4NGZhNGRlZjdiMGJlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GSYS12SVOm2w-8GeKEojl-VTBhBV1jVSfUEostn4WKw";
 // ville normalt havde min api key i .env file
@@ -376,11 +377,6 @@ export default function HomePage() {
     loadMovies();
   }, [state.currentPage]);
 
-  /*        setData((prev: any) => ({
-          ...newData,
-          results: [...prev.results, ...newData.results],
-        }));*/
-
   const updateCurrentPage = async () => {
     setActionData((prevState) => ({
       ...prevState,
@@ -390,8 +386,10 @@ export default function HomePage() {
 
   return (
     <div className="max-w-[100vw] bg-neutral-900 ">
+      {/* Navnar Component */}
+      <Navbar />
       {!showModal && (
-        <div className="fixed top-[2%] left-[48%]  z-10 text-[1.8rem] text-cyan-500">
+        <div className="fixed top-[9%] left-[48%]  z-10 text-[1.8rem] text-cyan-500">
           <FontAwesomeIcon icon={faArrowLeft} className="mx-1" />
           <FontAwesomeIcon icon={faHand} className="mx-1" />
           <FontAwesomeIcon icon={faArrowRight} className="mx-1" />
@@ -403,12 +401,12 @@ export default function HomePage() {
           <span className="px-4 text-white text-xl bg-slate-950 w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl "> Action</span>
           <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
             <div className="flex space-x-4">
-              {actionData.data.results.map((movie: any) => (
-                <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+              {actionData.data.results.map((movie: any, key: any) => (
+                <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                   {/* Added margin to give spacing between cards */}
                   <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                     <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                      <span className="text-sm font-medium text-slate-600 ">
+                      <span className="text-sm font-medium text-slate-600 text-center ">
                         <h2>{movie.title}</h2> {/*cards header*/}
                       </span>
                     </div>
@@ -442,12 +440,12 @@ export default function HomePage() {
           <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Comedy</span>
           <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
             <div className="flex space-x-4">
-              {comedyData.data.results.map((movie: any) => (
-                <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+              {comedyData.data.results.map((movie: any, key: any) => (
+                <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                   {/* Added margin to give spacing between cards */}
                   <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                     <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                      <span className="text-sm font-medium text-slate-600 ">
+                      <span className="text-sm font-medium text-slate-600 text-center">
                         <h2>{movie.title}</h2> {/*cards header*/}
                       </span>
                     </div>
@@ -481,12 +479,12 @@ export default function HomePage() {
           <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Thriller</span>
           <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
             <div className="flex space-x-4">
-              {thrillerData.data.results.map((movie: any) => (
-                <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+              {thrillerData.data.results.map((movie: any, key: any) => (
+                <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                   {/* Added margin to give spacing between cards */}
                   <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                     <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                      <span className="text-sm font-medium text-slate-600 ">
+                      <span className="text-sm font-medium text-slate-600 text-center">
                         <h2>{movie.title}</h2> {/*cards header*/}
                       </span>
                     </div>
@@ -521,12 +519,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">War</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {warData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+            {warData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                 {/* Added margin to give spacing between cards */}
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>
@@ -560,12 +558,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Romance</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {romanceData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+            {romanceData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                 {/* Added margin to give spacing between cards */}
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>
@@ -599,12 +597,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Drama</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {dramaData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+            {dramaData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                 {/* Added margin to give spacing between cards */}
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>
@@ -638,12 +636,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Crime</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {crimeData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+            {crimeData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                 {/* Added margin to give spacing between cards */}
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center ">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>
@@ -677,12 +675,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Documentary</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {documentaryData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
+            {documentaryData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
                 {/* Added margin to give spacing between cards */}
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center ">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>
@@ -716,12 +714,12 @@ export default function HomePage() {
         <span className="px-4 text-white text-xl bg-black w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl ">Horror</span>
         <div className="carousel rounded-box w-full overflow-x-auto scrollbar-hide scroll-smooth">
           <div className="flex space-x-4">
-            {horrorData.data.results.map((movie: any) => (
-              <div key={movie.id} className=" m-2 carousel-item w-1/4 shrink-0 ">
-                {/* Added margin to give spacing between cards */}
+            {horrorData.data.results.map((movie: any, key: any) => (
+              <div key={key} className=" m-2 carousel-item w-1/4 shrink-0 ">
+                /* Added margin to give spacing between cards */
                 <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
                   <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                    <span className="text-sm font-medium text-slate-600 ">
+                    <span className="text-sm font-medium text-slate-600 text-center">
                       <h2>{movie.title}</h2> {/*cards header*/}
                     </span>
                   </div>

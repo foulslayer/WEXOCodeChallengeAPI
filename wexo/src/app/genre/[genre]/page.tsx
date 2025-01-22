@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Modal from "@/components/Modal";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
 
 const API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDIzOGYxOWM5ZGMzNjVkY2M0YWIxODRlMDNjOThhZSIsIm5iZiI6MTczNjUwMTMxMC45MjksInN1YiI6IjY3ODBlODNlZWU4NGZhNGRlZjdiMGJlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GSYS12SVOm2w-8GeKEojl-VTBhBV1jVSfUEostn4WKw";
 // ville normalt havde min api key i .env file
@@ -99,15 +100,17 @@ export default function GenrePage() {
   return (
     <div className="max-w-[100vw] bg-neutral-900">
       <div>
+        {/* Navnar Component */}
+        <Navbar />
         {/** Action */}
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center ">
           <span className="px-4 text-white text-xl bg-slate-950 w-full h-[4rem] flex items-center mx-2 mt-3 rounded-xl  ">{genreFromPath}</span>
-          {selectedGenreData.data.results.map((movie: any) => (
-            <div key={movie.id} className="flex flex-wrap m-2 w-[23%]  ">
+          {selectedGenreData.data.results.map((movie: any, key: any) => (
+            <div key={key} className="flex flex-wrap m-2 w-[23%]  ">
               {/* Added margin to give spacing between cards */}
               <div onClick={() => handleOpenModal(movie)} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg min-h-[40rem] max-h-[40rem] ">
-                <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-                  <span className="text-sm font-medium text-slate-600 ">
+                <div className="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1 ">
+                  <span className="text-sm font-medium text-slate-600 text-center ">
                     <h2>{movie.title}</h2> {/*cards header*/}
                   </span>
                 </div>
@@ -122,8 +125,8 @@ export default function GenrePage() {
               </div>
             </div>
           ))}
+          <div className="bg-blue-500" ref={ref} style={{ height: "10hv" }}></div>
         </div>
-        <div className="bg-blue-500" ref={ref} style={{ height: "10wh" }}></div>
       </div>
 
       {/* Modal Component */}
